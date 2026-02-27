@@ -75,7 +75,7 @@ python data_generator.py --out_dir data --level postal
 This will create:
 
 ```
-data/region_graph_with_features_and_targets_test.npz
+data/region_graph_with_features_and_targets.npz
 ```
 
 This step generates:
