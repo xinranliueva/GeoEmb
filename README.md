@@ -12,7 +12,7 @@ The full pipeline is fully reproducible using the provided environment specifica
 
 # Overview
 
-The goal is to learn spatial embeddings from multimodal environmental data (wind and air quality) defined over a regional graph. The learned embeddings are evaluated on downstream spatial interpolation tasks.
+The goal is to learn spatial embeddings from multimodal environmental data (wind and pollution) defined over a regional graph. The learned embeddings are evaluated on downstream spatial interpolation tasks.
 
 Pipeline stages:
 
