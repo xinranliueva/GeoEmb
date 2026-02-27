@@ -94,10 +94,7 @@ Runtime: less than 1 minute
 Run:
 
 ```bash
-python pretrain_shared.py \
-  --data data/region_graph_with_features_and_targets_test.npz \
-  --out checkpoints \
-  --epochs 10000
+python pretrain_shared.py --cuda 1
 ```
 
 This will create:
