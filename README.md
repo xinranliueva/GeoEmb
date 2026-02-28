@@ -29,11 +29,12 @@ We provide an environment file for reproducibility.
 ## Create the environment
 
 ```bash
-conda env create -f environment.yaml
+conda install -n base -c conda-forge mamba
+mamba env create -f environment.yml
 conda activate <env_name>
 ```
 
-Replace `<env_name>` with the name specified inside `environment.yaml`.
+Replace `<env_name>` with the name specified inside `environment.yml`.
 
 ## Verify installation
 
