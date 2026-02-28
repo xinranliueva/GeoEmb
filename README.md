@@ -28,13 +28,42 @@ We provide an environment file for reproducibility.
 
 ## Create the environment
 
+First, install **mamba** in the base environment (only needed once):
+
 ```bash
-conda install -n base -c conda-forge mamba
-mamba env create -f environment.yml
-conda activate <env_name>
+conda activate base
+conda install -c conda-forge mamba
 ```
 
-Replace `<env_name>` with the name specified inside `environment.yml`.
+Then create the environment from the YAML file:
+
+```bash
+mamba env create -f environment.yml
+```
+
+Activate the environment:
+
+```bash
+conda activate geo
+```
+
+Replace `geo` with the name specified inside `environment.yml`. It is currently set to `geo`, but feel free to change the name according to your preference.
+
+You can check the name by opening `environment.yml` and looking at the first line:
+
+```yaml
+name: geo
+```
+
+---
+
+## Notes
+
+- `mamba` makes solving the environment much faster and more reliable than `conda`.
+- It works best with **conda 24 or newer**, but also works with older versions.
+- You only need to install `mamba` once.
+
+---
 
 ## Verify installation
 
