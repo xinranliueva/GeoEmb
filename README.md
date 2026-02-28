@@ -62,9 +62,7 @@ You can modify the name by opening `environment.yml` and looking at the first li
 name: geo
 ```
 
----
-
-## Notes
+### Notes
 
 - `mamba` makes solving the environment much faster and more reliable than `conda`.
 - It works best with **conda 24 or newer**, and may not work as well with older versions.
