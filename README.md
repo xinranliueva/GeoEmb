@@ -171,9 +171,9 @@ Methods evaluated:
 
 - kNN  
 - IDW  
-- MLP  
+- Embedding+MLP  
 
-Runtime: less than 1 minute  
+We pair embeddings with a standardized downstream predictor (scikit-learn MLPRegressor). This choice reflects a general downstream setting, including scenarios without GPU access, and ensures a reproducible comparison.
 
 ---
 
