@@ -257,7 +257,7 @@ def main():
 
     # load embedding
 
-    Z = torch.load(args.emb).cpu().numpy()
+    Z = torch.load(args.emb, weights_only=True).cpu().numpy()
 
     # split
 
