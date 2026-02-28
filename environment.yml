@@ -1,0 +1,34 @@
+name: geo
+
+channels:
+  - pyg
+  - pytorch
+  - nvidia
+  - conda-forge
+
+dependencies:
+  - matplotlib-base=3.9.3
+  - matplotlib-inline=0.2.1
+  - numpy=1.26.4
+  - pip=24.2
+  - pyg=2.6.1
+  - python=3.11.8
+  - pytorch=2.4.1
+  - pytorch-cuda=12.1
+  - scipy=1.14.1
+  - tqdm=4.66.5
+  - yaml=0.2.5
+  - pip:
+      - geopandas==0.14.4
+      - h5py==3.15.1
+      - nbformat==5.10.4
+      - pandas==2.1.4
+      - plotly==6.5.2
+      - plotly-geo==1.0.0
+      - pluggy==1.6.0
+      - pot==0.9.5
+      - pytest==9.0.2
+      - scikit-learn==1.8.0
+      - shapely==2.0.3
+      - wandb==0.20.1
+prefix: /home/liux31/miniconda3/envs/geo
