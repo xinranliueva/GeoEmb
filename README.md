@@ -24,6 +24,13 @@ Pipeline stages:
 
 # Environment Setup
 
+First, clone the repository:
+
+```bash
+git clone https://github.com/xinranliueva/GeoEmb.git
+cd GeoEmb/
+```
+
 We provide an environment file for reproducibility.
 
 ## Create the environment
