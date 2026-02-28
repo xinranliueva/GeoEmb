@@ -47,9 +47,9 @@ Activate the environment:
 conda activate geo
 ```
 
-Replace `geo` with the name specified inside `environment.yml`. It is currently set to `geo`, but feel free to change the name according to your preference.
+The environment name `geo` is specified inside `environment.yml`. It is currently set to `geo`, but feel free to change the name according to your preference.
 
-You can check the name by opening `environment.yml` and looking at the first line:
+You can modify the name by opening `environment.yml` and looking at the first line:
 
 ```yaml
 name: geo
@@ -60,7 +60,7 @@ name: geo
 ## Notes
 
 - `mamba` makes solving the environment much faster and more reliable than `conda`.
-- It works best with **conda 24 or newer**, but also works with older versions.
+- It works best with **conda 24 or newer**, and may not work as well with older versions.
 - You only need to install `mamba` once.
 
 ---
