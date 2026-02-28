@@ -140,7 +140,7 @@ def generate(config: dict, out_dir: str) -> str:
 
     final_path = os.path.join(
         out_dir,
-        "region_graph_with_features_and_targets_test.npz"
+        "region_graph_with_features_and_targets.npz"
     )
 
     np.savez(
