@@ -6,19 +6,7 @@ This repository contains code to:
 2. Train a shared masked graph autoencoder using self-supervised learning  
 3. Evaluate learned spatial embeddings on downstream regression tasks  
 
-The full pipeline is fully reproducible using the provided environment specification.
-
----
-
-# Overview
-
-The goal is to learn spatial embeddings from multimodal environmental data (wind and pollution) defined over a regional graph. The learned embeddings are evaluated on downstream spatial interpolation tasks.
-
-Pipeline stages:
-
-- Dataset generation  
-- Self-supervised embedding pretraining  
-- Downstream evaluation  
+For reproducibility, the full pipeline runs with a predefined default seed and requires no additional input arguments.
 
 ---
 
@@ -35,17 +23,25 @@ We provide an environment file for reproducibility.
 
 ## Create the environment
 
-First, install **mamba** in the base environment (only needed once):
+We **strongly recommend using `mamba`** for faster and more reliable environment installation. It is fully compatible with conda and significantly reduces environment solving time.
+
+Install `mamba` in the base environment (only needed once):
 
 ```bash
 conda activate base
 conda install -c conda-forge mamba
 ```
 
-Then create the environment from the YAML file:
+Then create the environment:
 
 ```bash
 mamba env create -f environment.yml
+```
+
+Alternatively, you can use `conda` (this may be much slower):
+
+```bash
+conda env create -f environment.yml
 ```
 
 Activate the environment:
@@ -62,40 +58,6 @@ You can modify the name by opening `environment.yml` and looking at the first li
 name: geo
 ```
 
-### Notes
-
-- `mamba` makes solving the environment much faster and more reliable than `conda`.
-- It works best with **conda 24 or newer**, and may not work as well with older versions.
-- You only need to install `mamba` once.
-
----
-
-## Verify installation
-
-```bash
-python -c "import torch; print(torch.__version__)"
-```
-
----
-
-# Hardware
-
-All experiments were run on:
-
-- GPU: NVIDIA RTX A6000 
-- OS: Linux  
-- Python: 3.11
-- Framework: PyTorch  
-
-GPU is recommended but not required.
-
-The code automatically uses GPU if available.
-
-To explicitly select GPU:
-
-```bash
-python pretrain_shared.py --cuda 1
-```
 
 ---
 
@@ -104,7 +66,14 @@ python pretrain_shared.py --cuda 1
 Run:
 
 ```bash
-python data_generator.py --out_dir data --level postal
+cd data
+python data_generator.py 
+```
+
+By default, the data is generated at the **postal code level**. To generate data at the **county level**, use:
+
+```bash
+python data_generator.py --level county
 ```
 
 This will create:
@@ -120,7 +89,7 @@ This step generates:
 - Air quality features  
 - Regression targets  
 
-Runtime: less than 1 minute
+Runtime: around 3 minutes.
 
 ---
 
@@ -129,20 +98,24 @@ Runtime: less than 1 minute
 Run:
 
 ```bash
+cd pretrain
 python pretrain_shared.py --cuda 1
 ```
+Set `--cuda` to the desired GPU index.
 
-This will create:
+This will create the following files:
 
 ```
 checkpoints/shared_final_emb_128.pt
+checkpoints/shared_AE_128.pt
 ```
 
-This file contains the learned spatial embeddings.
+- `shared_final_emb_128.pt` contains the learned spatial embeddings.
+- `shared_AE_128.pt` contains the trained model weights.
 
 Typical runtime on RTX A6000:
 
-30–60 minutes  
+23-28 minutes  
 
 ---
 
@@ -151,8 +124,15 @@ Typical runtime on RTX A6000:
 Run:
 
 ```bash
-python eval.py --target env 
+cd Evaluation
+python eval.py 
+```
+By default, the evaluation uses the **respiratory risk (`res`) target**.
 
+To evaluate on the **environmental burden (`env`) target**, run:
+
+```bash
+python eval.py --target env
 ```
 
 This will create:
@@ -175,6 +155,7 @@ Methods evaluated:
 
 We pair embeddings with a standardized downstream predictor (scikit-learn MLPRegressor). This choice reflects a general downstream setting, including scenarios without GPU access, and ensures a reproducible comparison.
 
+**Note:** Evaluation includes grid search to select the best hyperparameters for each method, and typically takes around 11 minutes to complete.
 ---
 
 # Full Reproducibility Pipeline
@@ -182,62 +163,41 @@ We pair embeddings with a standardized downstream predictor (scikit-learn MLPReg
 Run the following commands in order:
 
 ```bash
-conda env create -f environment.yaml
-conda activate <env_name>
+git clone https://github.com/xinranliueva/GeoEmb.git
+cd GeoEmb/
 
-python data_generator.py --out_dir data
+# Create and activate environment (mamba strongly recommended)
+mamba env create -f environment.yml
+conda activate geo
 
-python pretrain_shared.py \
-  --data data/region_graph_with_features_and_targets.npz \
-  --out checkpoints
+# Generate dataset
+python data/data_generator.py
 
-python eval.py \
-  --input data/region_graph_with_features_and_targets.npz \
-  --emb checkpoints/shared_final_emb_128.pt
+# Train embedding model
+python pretrain/pretrain_shared.py
+
+# Evaluate embeddings
+python Evaluation/eval.py
 ```
 
 ---
 
-# Project Structure
-
-```
-.
-README.md
-environment.yaml
-
-data_generator.py
-pretrain_shared.py
-eval.py
-
-models/
-utils/
-dataloader/
-regressors/
-
-data/
-checkpoints/
-results.csv
-```
-
----
 
 # Expected Runtime
 
 On NVIDIA RTX A6000:
 
-- Dataset generation: < 1 minute  
-- Training: 30–60 minutes  
-- Evaluation: < 1 minute  
+- Dataset generation: < 3 minute  
+- Training: 23-28 minutes  
+- Evaluation: < 11 minute  
 
 ---
 
 # Reproducibility Notes
 
 - All scripts use fixed random seeds where applicable  
-- The environment file ensures reproducibility  
-- Generated embeddings are saved and reusable  
-- The code runs on GPU or CPU  
-
+- The data, checkpoints, and results included in this repository are generated at the **postal code level** by default.
+  
 ---
 
 # Contact
