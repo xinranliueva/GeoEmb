@@ -202,6 +202,12 @@ On NVIDIA RTX A6000:
   
 ---
 
+# AI assistance and disclosure
+
+ChatGPT was used to assist with drafting code comments, documentation, and preliminary test files. All such content was thoroughly reviewed, corrected, and validated by the author. The research ideas, methodology, implementation, experiments, and conclusions were conceived, executed, and verified by the author.
+
+---
+
 # Contact
 
 Xinran Liu  (xinran.liu@vanderbilt.edu)
