@@ -224,14 +224,15 @@ def save_results(results, target, seed, out_file):
 def main():
 
     parser = argparse.ArgumentParser()
+    ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    parser.add_argument("--input", type=str, default="../data/region_graph_with_features_and_targets.npz", help="Path to dataset .npz file")
+    parser.add_argument("--input", type=str, default=os.path.join(ROOT, "data", "region_graph_with_features_and_targets.npz"), help="Path to dataset .npz file")
 
-    parser.add_argument("--emb", type=str, default="../pretrain/checkpoints/shared_final_emb_128.pt", help="Path to embedding .pt file")
+    parser.add_argument("--emb", type=str, default=os.path.join(ROOT, "pretrain", "checkpoints", "shared_final_emb_128.pt"), help="Path to embedding .pt file")
     parser.add_argument("--target", choices=["res", "env"], default="res")
     parser.add_argument("--method", choices=["knn", "idw", "mlp", "all"], default="all")
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--out", type=str, default="results.csv")
+    parser.add_argument("--out", type=str, default=os.path.join(ROOT, "Evaluation", "results.csv"), help="Path to output CSV file")
     
     args = parser.parse_args()
 

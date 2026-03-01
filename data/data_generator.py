@@ -163,7 +163,8 @@ def generate(config: dict, out_dir: str) -> str:
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Generate synthetic multimodal spatial dataset")
-    parser.add_argument("--out_dir", type=str, default="./", help="Output directory")
+    ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    parser.add_argument("--out_dir", type=str, default=os.path.join(ROOT, "data"), help="Output directory")
     parser.add_argument("--level", type=str, default="postal", choices=["postal", "county"], help="Sampling level")
     
     args = parser.parse_args()

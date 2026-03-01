@@ -149,8 +149,8 @@ def train(cfg):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-
-    parser.add_argument("--data", default="../data/region_graph_with_features_and_targets.npz")
+    ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    parser.add_argument("--data", default=os.path.join(ROOT, "data", "region_graph_with_features_and_targets.npz"))
 
     parser.add_argument("--cuda", type=int, default=0)
 
@@ -177,7 +177,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--seed", type=int, default=42)
 
-    parser.add_argument("--out", default="checkpoints")
+    parser.add_argument("--out", default=os.path.join(ROOT, "pretrain", "checkpoints"))
 
     parser.add_argument("--project", default="graph_ssl_shared")
 
