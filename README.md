@@ -10,6 +10,30 @@ For reproducibility, the full pipeline runs with a predefined default seed and r
 
 ---
 
+# TL;DR (Full Reproducibility Pipeline)
+
+Run the following commands in order:
+
+```bash
+git clone https://github.com/xinranliueva/GeoEmb.git
+cd GeoEmb/
+
+# Create and activate environment (mamba strongly recommended)
+mamba env create -f environment.yml
+conda activate geo
+
+# Generate dataset
+python data/data_generator.py
+
+# Train embedding model
+python pretrain/pretrain_shared.py
+
+# Evaluate embeddings
+python Evaluation/eval.py
+```
+
+---
+
 # Environment Setup
 
 First, clone the repository:
@@ -160,30 +184,6 @@ We pair embeddings with a standardized downstream predictor (scikit-learn MLPReg
 **Note:** Evaluation includes grid search to select the best hyperparameters for each method, and typically takes around 11 minutes to complete.
 ---
 
-# Full Reproducibility Pipeline
-
-Run the following commands in order:
-
-```bash
-git clone https://github.com/xinranliueva/GeoEmb.git
-cd GeoEmb/
-
-# Create and activate environment (mamba strongly recommended)
-mamba env create -f environment.yml
-conda activate geo
-
-# Generate dataset
-python data/data_generator.py
-
-# Train embedding model
-python pretrain/pretrain_shared.py
-
-# Evaluate embeddings
-python Evaluation/eval.py
-```
-
----
-
 
 # Expected Runtime
 
@@ -200,6 +200,12 @@ On NVIDIA RTX A6000:
 - All scripts use fixed random seeds where applicable  
 - The data, checkpoints, and results included in this repository are generated at the **postal code level** by default.
   
+---
+
+# AI assistance and disclosure
+
+ChatGPT was used to assist with drafting code comments, documentation, and preliminary test files. All such content was thoroughly reviewed, corrected, and validated by the author. The research ideas, methodology, implementation, experiments, and conclusions were conceived, executed, and verified by the author.
+
 ---
 
 # Contact
