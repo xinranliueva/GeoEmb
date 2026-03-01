@@ -82,12 +82,14 @@ This will create:
 data/region_graph_with_features_and_targets.npz
 ```
 
-This step generates:
+This script uses a **deterministic data generator**, so it will produce the same dataset by default.
 
-- Spatial graph structure  
-- Wind features  
-- Air quality features  
-- Regression targets  
+If you would like to control or modify the random seeds, please refer to the following files, which handle different components of the generation process:
+
+- `wind.py` – wind field generation  
+- `pollution.py` – pollution field generation  
+- `region.py` – spatial region and graph generation  
+- `target.py` – downstream target generation
 
 Runtime: around 3 minutes.
 
