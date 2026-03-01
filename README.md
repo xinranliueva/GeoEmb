@@ -25,7 +25,7 @@ conda activate geo
 # Generate dataset
 python data/data_generator.py
 
-# Train embedding model
+# Train embedding model (If you prefer to use the provided pretrained embeddings, you may skip this step.)
 python pretrain/pretrain_shared.py
 
 # Evaluate embeddings
