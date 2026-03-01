@@ -10,6 +10,30 @@ For reproducibility, the full pipeline runs with a predefined default seed and r
 
 ---
 
+# TL;DR (Full Reproducibility Pipeline)
+
+Run the following commands in order:
+
+```bash
+git clone https://github.com/xinranliueva/GeoEmb.git
+cd GeoEmb/
+
+# Create and activate environment (mamba strongly recommended)
+mamba env create -f environment.yml
+conda activate geo
+
+# Generate dataset
+python data/data_generator.py
+
+# Train embedding model
+python pretrain/pretrain_shared.py
+
+# Evaluate embeddings
+python Evaluation/eval.py
+```
+
+---
+
 # Environment Setup
 
 First, clone the repository:
@@ -158,30 +182,6 @@ Methods evaluated:
 We pair embeddings with a standardized downstream predictor (scikit-learn MLPRegressor). This choice reflects a general downstream setting, including scenarios without GPU access, and ensures a reproducible comparison.
 
 **Note:** Evaluation includes grid search to select the best hyperparameters for each method, and typically takes around 11 minutes to complete.
----
-
-# Full Reproducibility Pipeline
-
-Run the following commands in order:
-
-```bash
-git clone https://github.com/xinranliueva/GeoEmb.git
-cd GeoEmb/
-
-# Create and activate environment (mamba strongly recommended)
-mamba env create -f environment.yml
-conda activate geo
-
-# Generate dataset
-python data/data_generator.py
-
-# Train embedding model
-python pretrain/pretrain_shared.py
-
-# Evaluate embeddings
-python Evaluation/eval.py
-```
-
 ---
 
 
