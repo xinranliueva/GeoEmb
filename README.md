@@ -43,7 +43,6 @@ git clone https://github.com/xinranliueva/GeoEmb.git
 cd GeoEmb/
 ```
 
-We provide an environment file for reproducibility.
 
 ## Create the environment
 
@@ -68,7 +67,7 @@ Alternatively, you can use `conda` (this may be much slower):
 conda env create -f environment.yml
 ```
 
-Activate the environment:
+Then activate the environment:
 
 ```bash
 conda activate geo
