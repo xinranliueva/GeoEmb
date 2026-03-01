@@ -25,7 +25,7 @@ conda activate geo
 # Generate dataset
 python data/data_generator.py
 
-# Train embedding model
+# Train embedding model (If you prefer to use the provided pretrained embeddings, you may skip this step.)
 python pretrain/pretrain_shared.py
 
 # Evaluate embeddings
@@ -182,8 +182,21 @@ Methods evaluated:
 We pair embeddings with a standardized downstream predictor (scikit-learn MLPRegressor). This choice reflects a general downstream setting, including scenarios without GPU access, and ensures a reproducible comparison.
 
 **Note:** Evaluation includes grid search to select the best hyperparameters for each method, and typically takes around 11 minutes to complete.
+
 ---
 
+# Test 
+We provide unit tests to verify the correctness of the data generation and model implementation.
+
+To run all tests, execute:
+
+```bash
+pytest -q
+```
+
+This will automatically discover and run all tests in the `test/` folder.
+
+---
 
 # Expected Runtime
 
